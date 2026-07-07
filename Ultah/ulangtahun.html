@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selamat Ulang Tahun, Cintaku! 🖤✨</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,600&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --dark-bg: #111111;
+            --card-bg: rgba(25, 25, 25, 0.65);
+            --gold: #d4af37;
+            --gold-light: #f3e5ab;
+            --text-light: #ffffff;
+            --text-muted: #a0a0a0;
+            --glow-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--dark-bg);
+            background-image: radial-gradient(circle at 50% 50%, #222222 0%, #111111 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Efek Kerlipan Bintang Emas */
+        .sparkle {
+            position: absolute;
+            background: var(--gold-light);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: twinkle 4s infinite ease-in-out;
+            z-index: 1;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; transform: translateY(0) scale(0.5); }
+            50% { opacity: 0.7; transform: translateY(-30px) scale(1); }
+        }
+
+        /* Container Utama Luxury */
+        .container {
+            width: 90%;
+            max-width: 420px;
+            z-index: 10;
+            padding: 5px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 28px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5), var(--glow-shadow);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            overflow: hidden;
+            height: 570px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* Menu Navigasi Minimalis Emas */
+        .nav-menu {
+            display: flex;
+            justify-content: space-around;
+            background: rgba(0, 0, 0, 0.4);
+            margin: 20px 20px 10px;
+            padding: 6px;
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-item {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: none;
+            border: none;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 10px 20px;
+            border-radius: 40px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item.active {
+            background: linear-gradient(135deg, #d4af37 0%, #aa7c11 100%);
+            color: var(--dark-bg);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Konten Halaman */
+        .tab-content {
+            display: none;
+            padding: 25px 30px;
+            overflow-y: auto;
+            flex: 1;
+            text-align: center;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .tab-content::-webkit-scrollbar { width: 4px; }
+        .tab-content::-webkit-scrollbar-thumb {
+            background: rgba(212, 175, 55, 0.4);
+            border-radius: 10px;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            color: #ffffff;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+            background: linear-gradient(to right, #ffffff, #f3e5ab, #d4af37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p.desc {
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* Tab 1: Jam Countdown Emas Premium */
+        .timer-container {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin: 35px 0;
+        }
+
+        .time-box {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 16px;
+            padding: 15px 5px;
+            flex: 1;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+            transition: border 0.3s;
+        }
+
+        .time-box:hover { border-color: var(--gold); }
+
+        .time-box span {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--gold);
+            display: block;
+        }
+
+        .time-box label {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Tab 2: Galeri Grid Dark Polaroid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            padding-bottom: 15px;
+        }
+
+        .polaroid {
+            background: #1a1a1a;
+            padding: 8px 8px 24px 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+            transform: rotate(var(--r));
+            transition: all 0.3s ease;
+        }
+
+        .polaroid:hover {
+            transform: rotate(0deg) scale(1.06);
+            z-index: 10;
+            border-color: var(--gold);
+            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.15);
+        }
+
+        .polaroid img {
+            width: 100%;
+            height: 125px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        /* Tab 3: Kotak Surat Misterius */
+        .envelope-wrapper {
+            margin: 40px auto 20px;
+            cursor: pointer;
+            font-size: 65px;
+            transition: transform 0.3s;
+            display: inline-block;
+            animation: floatEnvelope 3s infinite ease-in-out;
+            filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.2));
+        }
+
+        @keyframes floatEnvelope {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .letter-box {
+            display: none;
+            background: rgba(15, 15, 15, 0.95);
+            border-left: 4px solid var(--gold);
+            border-radius: 16px;
+            padding: 25px;
+            text-align: left;
+            margin-top: 15px;
+            border-top: 1px solid rgba(212, 175, 55, 0.1);
+            animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .letter-box p {
+            color: var(--text-light);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        /* Tombol Kontrol Musik */
+        .music-control {
+            position: absolute;
+            bottom: 15px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            color: var(--gold);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 20;
+            transition: all 0.3s;
+        }
+        .music-control:hover {
+            background: var(--gold);
+            color: var(--dark-bg);
+        }
+
+        /* Klik Layar Memunculkan Sparkle Emas */
+        .click-sparkle {
+            position: absolute;
+            font-size: 24px;
+            pointer-events: none;
+            animation: burst 0.8s ease-out forwards;
+            z-index: 999;
+        }
+
+        @keyframes burst {
+            0% { transform: translate(-50%, -50%) scale(0.3); opacity: 1; }
+            100% { transform: translate(-50%, -130%) scale(1.2); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="myMusic" loop>
+    <source src="The 1975 - About You (Official).mp3" type="audio/mpeg">
+</audio>
+
+    <div class="sparkle" style="width: 4px; height: 4px; left: 12%; top: 20%;"></div>
+    <div class="sparkle" style="width: 6px; height: 6px; right: 10%; top: 40%; animation-delay: 1.5s;"></div>
+    <div class="sparkle" style="width: 3px; height: 3px; left: 20%; bottom: 20%; animation-delay: 3s;"></div>
+
+    <div class="container">
+        <div class="card">
+            
+            <div class="nav-menu">
+                <button class="nav-item active" onclick="switchTab('utama')">🖤 Home</button>
+                <button class="nav-item" onclick="switchTab('foto')">📸 Galeri</button>
+                <button class="nav-item" onclick="switchTab('pesan')">✉️ Surat</button>
+            </div>
+
+            <div id="utama" class="tab-content active">
+                <h1 style="margin-top: 15px;">THE COUNTDOWN</h1>
+                <p class="desc">Menghitung mundur setiap detik berharga menuju hari kelahiranmu, Sayangku.</p>
+                
+                <div class="timer-container">
+                    <div class="time-box"><span id="days">00</span><label>Hari</label></div>
+                    <div class="time-box"><span id="hours">00</span><label>Jam</label></div>
+                    <div class="time-box"><span id="minutes">00</span><label>Menit</label></div>
+                    <div class="time-box"><span id="seconds">00</span><label>Detik</label></div>
+                </div>
+
+                <p class="desc" style="color: var(--gold); font-weight: 700; font-size: 15px; letter-spacing: 1px;">
+                    ✨ 6 AGUSTUS 2026 ✨
+                </p>
+            </div>
+
+            <div id="foto" class="tab-content">
+                <h1>OUR MEMORIES</h1>
+                <p class="desc" style="margin-bottom: 25px;">Setiap potret berharga yang merekam perjalanan kita.</p>
+                
+                <div class="gallery-grid">
+                    <div class="polaroid" style="--r: -3deg;"><img src="cibodas.jpeg" alt="Cibodas"></div>
+                    <div class="polaroid" style="--r: 2deg;"><img src="sayangku.jpg" alt="Sayangku"></div>
+                    <div class="polaroid" style="--r: -2deg;"><img src="ayang 2.jpg" alt="Ayang 2"></div>
+                    <div class="polaroid" style="--r: 4deg;"><img src="ayang 3.jpg" alt="Ayang 3"></div>
+                    <div class="polaroid" style="--r: -4deg;"><img src="shifa 1.jpg" alt="Shifa 1"></div>
+                    <div class="polaroid" style="--r: 3deg;"><img src="shifa 3.jpg" alt="Shifa 3"></div>
+                    <div class="polaroid" style="--r: -1deg;"><img src="shifa 4.jpg" alt="Shifa 4"></div>
+                    <div class="polaroid" style="--r: 4deg;"><img src="shifa 5.jpg" alt="Shifa 5"></div>
+                </div>
+            </div>
+
+            <div id="pesan" class="tab-content">
+                <h1>A PRIVATE NOTE</h1>
+                <p class="desc">Ketuk ikon di bawah ini untuk membuka rahasia hati.</p>
+                
+                <div class="envelope-wrapper" id="envelope" onclick="openLetter()">
+                    <div class="envelope-icon">✉️</div>
+                </div>
+                
+                <div class="letter-box" id="letter">
+                    <p style="font-family: 'Playfair Display', serif; color: var(--gold); margin-bottom: 12px; font-weight: 700; font-size: 16px; font-style: italic;">
+                        Dear Sayangku,
+                    </p>
+                    <p style="font-weight: 400;">
+                        Terima kasih sudah lahir ke dunia dan menjadi bagian terindah dalam hidupku. Semoga setiap detik di usiamu yang baru ini selalu diberkati dengan kebahagiaan, kesuksesan, dan kesehatan.
+                    </p>
+                    <p style="color: var(--gold); font-weight: 700; margin-top: 20px; text-align: right; font-size: 14px; font-style: italic;">
+                        "I love you tomorrow, today, and forever. 🖤"
+                    </p>
+                </div>
+            </div>
+
+            <button class="music-control" onclick="toggleMusic()" id="musicBtn">🎵 Musik: Off</button>
+
+        </div>
+    </div>
+
+    <script>
+        const audio = document.getElementById("myMusic");
+        const musicBtn = document.getElementById("musicBtn");
+
+        // Fungsi Memutar Musik Otomatis Saat Ada Interaksi (Ganti Tab/Buka Surat)
+        function playMusic() {
+            if (audio.paused) {
+                audio.play().then(() => {
+                    musicBtn.innerText = "🎵 Musik: On";
+                }).catch(err => {
+                    console.log("Menunggu interaksi user penuh untuk memutar musik.");
+                });
+            }
+        }
+
+        // Fungsi On/Off Manual lewat Tombol
+        function toggleMusic() {
+            if (audio.paused) {
+                audio.play();
+                musicBtn.innerText = "🎵 Musik: On";
+            } else {
+                audio.pause();
+                musicBtn.innerText = "🎵 Musik: Off";
+            }
+        }
+
+        // 1. Logika Ganti Tab
+        function switchTab(tabId) {
+            playMusic(); // Pemicu musik berputar
+
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.classList.remove('active'));
+
+            const menuItems = document.querySelectorAll('.nav-item');
+            menuItems.forEach(item => item.classList.remove('active'));
+
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        // 2. Countdown Kunci: 6 Agustus 2026
+        const birthdayDate = new Date("August 6, 2026 00:00:00").getTime();
+
+        const timerInterval = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = birthdayDate - now;
+
+            if (distance < 0) {
+                clearInterval(timerInterval);
+                document.querySelector(".timer-container").innerHTML = 
+                    "<h2 style='color:var(--gold); font-family:\"Playfair Display\"; width:100%; text-align:center; padding:15px;'>🎉 HAPPY BIRTHDAY CINTAKU! 🎉</h2>";
+            } else {
+                const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const s = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById("days").innerText = d < 10 ? "0" + d : d;
+                document.getElementById("hours").innerText = h < 10 ? "0" + h : h;
+                document.getElementById("minutes").innerText = m < 10 ? "0" + m : m;
+                document.getElementById("seconds").innerText = s < 10 ? "0" + s : s;
+            }
+        }, 1000);
+
+        // 3. Efek Buka Surat
+        function openLetter() {
+            playMusic(); // Pemicu musik alternatif
+            const letter = document.getElementById('letter');
+            const envelope = document.getElementById('envelope');
+            
+            envelope.style.transform = "scale(0.8) translateY(10px)";
+            envelope.style.opacity = "0";
+            setTimeout(() => {
+                envelope.style.display = "none";
+                letter.style.display = "block";
+            }, 300);
+        }
+
+        // 4. Klik Layar Keluar Sparkles Emas
+        document.body.addEventListener('click', function(e) {
+            if(e.target.tagName === 'BUTTON' || e.target.closest('.nav-menu')) return;
+            
+            const sparkle = document.createElement('div');
+            sparkle.classList.add('click-sparkle');
+            sparkle.innerHTML = ['✨','🖤','🌟','👑'][Math.floor(Math.random() * 4)];
+            sparkle.style.left = e.clientX + 'px';
+            sparkle.style.top = e.clientY + 'px';
+            
+            document.body.appendChild(sparkle);
+            setTimeout(() => { sparkle.remove(); }, 800);
+        });
+    </script>
+</body>
+</html>
