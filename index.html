@@ -4,17 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Selamat Ulang Tahun, Cintaku! 🖤✨</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,600&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --dark-bg: #111111;
-            --card-bg: rgba(25, 25, 25, 0.65);
+            --dark-bg: #0b0b0b;
+            --card-bg: rgba(20, 20, 20, 0.75);
             --gold: #d4af37;
-            --gold-light: #f3e5ab;
+            --gold-light: #fdf0a6;
+            --gold-glow: rgba(212, 175, 55, 0.35);
             --text-light: #ffffff;
-            --text-muted: #a0a0a0;
-            --glow-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+            --text-muted: #a5a5a5;
         }
 
         * {
@@ -26,16 +26,40 @@
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--dark-bg);
-            background-image: radial-gradient(circle at 50% 50%, #222222 0%, #111111 100%);
+            background-image: radial-gradient(circle at 50% 30%, #201a0e 0%, #0b0b0b 80%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             overflow: hidden;
             position: relative;
+            color: var(--text-light);
         }
 
-        /* Efek Kerlipan Bintang Emas */
+        /* Canvas untuk Efek Kembang Api / Confetti */
+        #confettiCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        /* Ambient Glow & Sparkles Background */
+        .ambient-glow {
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, rgba(0,0,0,0) 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
         .sparkle {
             position: absolute;
             background: var(--gold-light);
@@ -43,16 +67,17 @@
             pointer-events: none;
             animation: twinkle 4s infinite ease-in-out;
             z-index: 1;
+            box-shadow: 0 0 6px var(--gold);
         }
 
         @keyframes twinkle {
-            0%, 100% { opacity: 0; transform: translateY(0) scale(0.5); }
-            50% { opacity: 0.7; transform: translateY(-30px) scale(1); }
+            0%, 100% { opacity: 0; transform: translateY(0) scale(0.3); }
+            50% { opacity: 0.9; transform: translateY(-20px) scale(1); }
         }
 
-        /* Container Utama Luxury */
+        /* Container Utama */
         .container {
-            width: 90%;
+            width: 92%;
             max-width: 420px;
             z-index: 10;
             padding: 5px;
@@ -60,52 +85,54 @@
 
         .card {
             background: var(--card-bg);
-            border: 1px solid rgba(212, 175, 55, 0.3);
+            border: 1px solid rgba(212, 175, 55, 0.4);
             border-radius: 28px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.5), var(--glow-shadow);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 25px var(--gold-glow);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
             overflow: hidden;
-            height: 570px;
+            height: 580px;
             display: flex;
             flex-direction: column;
             position: relative;
+            transition: border-color 0.5s ease;
         }
 
-        /* Menu Navigasi Minimalis Emas */
+        /* Navigasi */
         .nav-menu {
             display: flex;
             justify-content: space-around;
-            background: rgba(0, 0, 0, 0.4);
-            margin: 20px 20px 10px;
-            padding: 6px;
+            background: rgba(0, 0, 0, 0.5);
+            margin: 18px 18px 8px;
+            padding: 5px;
             border-radius: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(212, 175, 55, 0.15);
         }
 
         .nav-item {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background: none;
             border: none;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 700;
             color: var(--text-muted);
             cursor: pointer;
-            padding: 10px 20px;
+            padding: 10px 18px;
             border-radius: 40px;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            letter-spacing: 0.5px;
         }
 
         .nav-item.active {
-            background: linear-gradient(135deg, #d4af37 0%, #aa7c11 100%);
-            color: var(--dark-bg);
+            background: linear-gradient(135deg, #d4af37 0%, #996e10 100%);
+            color: #0d0d0d;
             box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
         }
 
         /* Konten Halaman */
         .tab-content {
             display: none;
-            padding: 25px 30px;
+            padding: 20px 25px;
             overflow-y: auto;
             flex: 1;
             text-align: center;
@@ -113,6 +140,12 @@
 
         .tab-content.active {
             display: block;
+            animation: fadeIn 0.4s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .tab-content::-webkit-scrollbar { width: 4px; }
@@ -123,41 +156,44 @@
 
         h1 {
             font-family: 'Playfair Display', serif;
-            color: #ffffff;
             font-size: 24px;
             font-weight: 700;
-            margin-bottom: 10px;
-            letter-spacing: 0.5px;
-            background: linear-gradient(to right, #ffffff, #f3e5ab, #d4af37);
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+            background: linear-gradient(to right, #ffffff, #fdf0a6, #d4af37);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         p.desc {
             color: var(--text-muted);
-            font-size: 14px;
+            font-size: 13px;
             line-height: 1.6;
         }
 
-        /* Tab 1: Jam Countdown Emas Premium */
+        /* Tab 1: Countdown */
         .timer-container {
             display: flex;
             justify-content: center;
-            gap: 12px;
-            margin: 35px 0;
+            gap: 10px;
+            margin: 30px 0 25px;
         }
 
         .time-box {
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(212, 175, 55, 0.2);
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(212, 175, 55, 0.25);
             border-radius: 16px;
-            padding: 15px 5px;
+            padding: 14px 4px;
             flex: 1;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
-            transition: border 0.3s;
+            box-shadow: inset 0 0 12px rgba(0,0,0,0.6);
+            transition: all 0.3s;
         }
 
-        .time-box:hover { border-color: var(--gold); }
+        .time-box:hover {
+            border-color: var(--gold);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.2);
+        }
 
         .time-box span {
             font-family: 'Playfair Display', serif;
@@ -165,145 +201,206 @@
             font-weight: 700;
             color: var(--gold);
             display: block;
+            text-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
         }
 
         .time-box label {
-            font-size: 10px;
+            font-size: 9px;
             font-weight: 700;
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 1px;
+            margin-top: 2px;
+            display: block;
         }
 
-        /* Tab 2: Galeri Grid Dark Polaroid */
+        .quote-badge {
+            display: inline-block;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 20px;
+            padding: 8px 16px;
+            font-size: 12px;
+            color: var(--gold-light);
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-top: 10px;
+        }
+
+        /* Tab 2: Galeri Polaroid */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
-            padding-bottom: 15px;
+            gap: 14px;
+            padding: 10px 0 20px;
         }
 
         .polaroid {
-            background: #1a1a1a;
-            padding: 8px 8px 24px 8px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: #181818;
+            padding: 8px 8px 18px 8px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 8px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
             transform: rotate(var(--r));
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
         }
 
         .polaroid:hover {
-            transform: rotate(0deg) scale(1.06);
+            transform: rotate(0deg) scale(1.08);
             z-index: 10;
             border-color: var(--gold);
-            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.15);
+            box-shadow: 0 12px 25px rgba(212, 175, 55, 0.25);
         }
 
         .polaroid img {
             width: 100%;
-            height: 125px;
+            height: 115px;
             object-fit: cover;
             border-radius: 4px;
+            filter: brightness(0.95);
         }
 
-        /* Tab 3: Kotak Surat Misterius */
+        .polaroid-caption {
+            font-size: 10px;
+            color: var(--gold-light);
+            margin-top: 8px;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+        }
+
+        /* Tab 3: Surat Rahasia */
         .envelope-wrapper {
-            margin: 40px auto 20px;
+            margin: 35px auto 15px;
             cursor: pointer;
-            font-size: 65px;
-            transition: transform 0.3s;
+            transition: all 0.3s;
             display: inline-block;
             animation: floatEnvelope 3s infinite ease-in-out;
-            filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.2));
+        }
+
+        .envelope-icon {
+            font-size: 60px;
+            filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.4));
+            transition: transform 0.3s ease;
+        }
+
+        .envelope-wrapper:hover .envelope-icon {
+            transform: scale(1.15) rotate(5deg);
         }
 
         @keyframes floatEnvelope {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
+            50% { transform: translateY(-10px); }
         }
 
         .letter-box {
             display: none;
-            background: rgba(15, 15, 15, 0.95);
-            border-left: 4px solid var(--gold);
+            background: rgba(12, 12, 12, 0.9);
+            border-left: 3px solid var(--gold);
             border-radius: 16px;
-            padding: 25px;
+            padding: 22px;
             text-align: left;
-            margin-top: 15px;
-            border-top: 1px solid rgba(212, 175, 55, 0.1);
+            margin-top: 10px;
+            border-top: 1px solid rgba(212, 175, 55, 0.15);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
         @keyframes slideUp {
-            from { opacity: 0; transform: translateY(15px); }
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         .letter-box p {
-            color: var(--text-light);
-            font-size: 14px;
+            color: #e0e0e0;
+            font-size: 13px;
             line-height: 1.7;
         }
 
-        /* Tombol Kontrol Musik */
-        .music-control {
-            position: absolute;
-            bottom: 15px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.05);
+        .close-letter-btn {
+            background: none;
             border: 1px solid rgba(212, 175, 55, 0.3);
             color: var(--gold);
-            padding: 6px 12px;
-            border-radius: 20px;
             font-size: 11px;
-            font-weight: bold;
+            padding: 5px 12px;
+            border-radius: 15px;
+            margin-top: 15px;
             cursor: pointer;
-            z-index: 20;
             transition: all 0.3s;
         }
-        .music-control:hover {
+
+        .close-letter-btn:hover {
             background: var(--gold);
-            color: var(--dark-bg);
+            color: #000;
         }
 
-        /* Klik Layar Memunculkan Sparkle Emas */
+        /* Music Floating Control */
+        .music-control {
+            position: absolute;
+            bottom: 12px;
+            right: 18px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            color: var(--gold-light);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            z-index: 20;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .music-control:hover {
+            background: var(--gold);
+            color: #000;
+            box-shadow: 0 0 12px var(--gold-glow);
+        }
+
+        /* Sparkle On-Click */
         .click-sparkle {
             position: absolute;
-            font-size: 24px;
+            font-size: 20px;
             pointer-events: none;
             animation: burst 0.8s ease-out forwards;
-            z-index: 999;
+            z-index: 9999;
         }
 
         @keyframes burst {
             0% { transform: translate(-50%, -50%) scale(0.3); opacity: 1; }
-            100% { transform: translate(-50%, -130%) scale(1.2); opacity: 0; }
+            100% { transform: translate(-50%, -140%) scale(1.3); opacity: 0; }
         }
     </style>
 </head>
 <body>
 
     <audio id="myMusic" loop>
-    <source src="The 1975 - About You (Official).mp3" type="audio/mpeg">
-</audio>
+        <source src="The 1975 - About You (Official).mp3" type="audio/mpeg">
+    </audio>
 
-    <div class="sparkle" style="width: 4px; height: 4px; left: 12%; top: 20%;"></div>
-    <div class="sparkle" style="width: 6px; height: 6px; right: 10%; top: 40%; animation-delay: 1.5s;"></div>
-    <div class="sparkle" style="width: 3px; height: 3px; left: 20%; bottom: 20%; animation-delay: 3s;"></div>
+    <canvas id="confettiCanvas"></canvas>
+
+    <div class="ambient-glow"></div>
+
+    <div class="sparkle" style="width: 5px; height: 5px; left: 10%; top: 15%;"></div>
+    <div class="sparkle" style="width: 7px; height: 7px; right: 12%; top: 35%; animation-delay: 1.5s;"></div>
+    <div class="sparkle" style="width: 4px; height: 4px; left: 18%; bottom: 25%; animation-delay: 2.8s;"></div>
 
     <div class="container">
         <div class="card">
             
             <div class="nav-menu">
-                <button class="nav-item active" onclick="switchTab('utama')">🖤 Home</button>
-                <button class="nav-item" onclick="switchTab('foto')">📸 Galeri</button>
-                <button class="nav-item" onclick="switchTab('pesan')">✉️ Surat</button>
+                <button class="nav-item active" onclick="switchTab('utama', this)">🖤 Home</button>
+                <button class="nav-item" onclick="switchTab('foto', this)">📸 Galeri</button>
+                <button class="nav-item" onclick="switchTab('pesan', this)">✉️ Surat</button>
             </div>
 
+            <!-- Tab 1: Countdown -->
             <div id="utama" class="tab-content active">
-                <h1 style="margin-top: 15px;">THE COUNTDOWN</h1>
-                <p class="desc">Menghitung mundur setiap detik berharga menuju hari kelahiranmu, Sayangku.</p>
+                <h1 style="margin-top: 10px;">THE COUNTDOWN</h1>
+                <p class="desc">Menghitung detik berharga menuju hari istimewamu, Sayangku.</p>
                 
                 <div class="timer-container">
                     <div class="time-box"><span id="days">00</span><label>Hari</label></div>
@@ -312,45 +409,74 @@
                     <div class="time-box"><span id="seconds">00</span><label>Detik</label></div>
                 </div>
 
-                <p class="desc" style="color: var(--gold); font-weight: 700; font-size: 15px; letter-spacing: 1px;">
+                <div class="quote-badge">
                     ✨ 6 AGUSTUS 2026 ✨
-                </p>
-            </div>
-
-            <div id="foto" class="tab-content">
-                <h1>OUR MEMORIES</h1>
-                <p class="desc" style="margin-bottom: 25px;">Setiap potret berharga yang merekam perjalanan kita.</p>
-                
-                <div class="gallery-grid">
-                    <div class="polaroid" style="--r: -3deg;"><img src="cibodas.jpeg" alt="Cibodas"></div>
-                    <div class="polaroid" style="--r: 2deg;"><img src="sayangku.jpg" alt="Sayangku"></div>
-                    <div class="polaroid" style="--r: -2deg;"><img src="ayang 2.jpg" alt="Ayang 2"></div>
-                    <div class="polaroid" style="--r: 4deg;"><img src="ayang 3.jpg" alt="Ayang 3"></div>
-                    <div class="polaroid" style="--r: -4deg;"><img src="shifa 1.jpg" alt="Shifa 1"></div>
-                    <div class="polaroid" style="--r: 3deg;"><img src="shifa 3.jpg" alt="Shifa 3"></div>
-                    <div class="polaroid" style="--r: -1deg;"><img src="shifa 4.jpg" alt="Shifa 4"></div>
-                    <div class="polaroid" style="--r: 4deg;"><img src="shifa 5.jpg" alt="Shifa 5"></div>
                 </div>
             </div>
 
+            <!-- Tab 2: Galeri Foto -->
+            <div id="foto" class="tab-content">
+                <h1>OUR MEMORIES</h1>
+                <p class="desc" style="margin-bottom: 18px;">Potret manis perjalanan cerita kita.</p>
+                
+                <div class="gallery-grid">
+                    <div class="polaroid" style="--r: -3deg;">
+                        <img src="cibodas.jpeg" alt="Cibodas">
+                        <div class="polaroid-caption">Cibodas 🖤</div>
+                    </div>
+                    <div class="polaroid" style="--r: 2deg;">
+                        <img src="sayangku.jpg" alt="Sayangku">
+                        <div class="polaroid-caption">My Favorite Person</div>
+                    </div>
+                    <div class="polaroid" style="--r: -2deg;">
+                        <img src="ayang 2.jpg" alt="Ayang 2">
+                        <div class="polaroid-caption">Sweet Moments</div>
+                    </div>
+                    <div class="polaroid" style="--r: 4deg;">
+                        <img src="ayang 3.jpg" alt="Ayang 3">
+                        <div class="polaroid-caption">Always You</div>
+                    </div>
+                    <div class="polaroid" style="--r: -4deg;">
+                        <img src="shifa 1.jpg" alt="Shifa 1">
+                        <div class="polaroid-caption">Beautiful Smile</div>
+                    </div>
+                    <div class="polaroid" style="--r: 3deg;">
+                        <img src="shifa 3.jpg" alt="Shifa 3">
+                        <div class="polaroid-caption">Precious Day</div>
+                    </div>
+                    <div class="polaroid" style="--r: -1deg;">
+                        <img src="shifa 4.jpg" alt="Shifa 4">
+                        <div class="polaroid-caption">Warm Warmth</div>
+                    </div>
+                    <div class="polaroid" style="--r: 4deg;">
+                        <img src="shifa 5.jpg" alt="Shifa 5">
+                        <div class="polaroid-caption">Forever & Always</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 3: Surat -->
             <div id="pesan" class="tab-content">
                 <h1>A PRIVATE NOTE</h1>
-                <p class="desc">Ketuk ikon di bawah ini untuk membuka rahasia hati.</p>
+                <p class="desc">Ketuk amplop di bawah untuk melihat pesan rahasia.</p>
                 
                 <div class="envelope-wrapper" id="envelope" onclick="openLetter()">
                     <div class="envelope-icon">✉️</div>
                 </div>
                 
                 <div class="letter-box" id="letter">
-                    <p style="font-family: 'Playfair Display', serif; color: var(--gold); margin-bottom: 12px; font-weight: 700; font-size: 16px; font-style: italic;">
+                    <p style="font-family: 'Playfair Display', serif; color: var(--gold); margin-bottom: 10px; font-weight: 700; font-size: 15px; font-style: italic;">
                         Dear Sayangku,
                     </p>
-                    <p style="font-weight: 400;">
-                        Terima kasih sudah lahir ke dunia dan menjadi bagian terindah dalam hidupku. Semoga setiap detik di usiamu yang baru ini selalu diberkati dengan kebahagiaan, kesuksesan, dan kesehatan.
+                    <p>
+                        Haii Selamat Bertambah Usia Sayangg❤️ Semoga Panjang Umur Dan Sehat Selalu Ya❤️✨ Kamu adalah tempat pulang terbaik dan alasan senyumku setiap hari. Semoga semua mimpi indahmu satu per satu jadi kenyataan ya🖤💕
                     </p>
-                    <p style="color: var(--gold); font-weight: 700; margin-top: 20px; text-align: right; font-size: 14px; font-style: italic;">
+                    <p style="color: var(--gold); font-weight: 700; margin-top: 16px; text-align: right; font-size: 13px; font-style: italic;">
                         "I love you tomorrow, today, and forever. 🖤"
                     </p>
+                    <div style="text-align: center;">
+                        <button class="close-letter-btn" onclick="closeLetter()">Tutup Surat ✉️</button>
+                    </div>
                 </div>
             </div>
 
@@ -363,18 +489,17 @@
         const audio = document.getElementById("myMusic");
         const musicBtn = document.getElementById("musicBtn");
 
-        // Fungsi Memutar Musik Otomatis Saat Ada Interaksi (Ganti Tab/Buka Surat)
+        // 1. Pemutar Musik Otomatis
         function playMusic() {
             if (audio.paused) {
                 audio.play().then(() => {
                     musicBtn.innerText = "🎵 Musik: On";
                 }).catch(err => {
-                    console.log("Menunggu interaksi user penuh untuk memutar musik.");
+                    console.log("Menunggu interaksi user.");
                 });
             }
         }
 
-        // Fungsi On/Off Manual lewat Tombol
         function toggleMusic() {
             if (audio.paused) {
                 audio.play();
@@ -385,9 +510,9 @@
             }
         }
 
-        // 1. Logika Ganti Tab
-        function switchTab(tabId) {
-            playMusic(); // Pemicu musik berputar
+        // 2. Perpindahan Tab (Perbaikan Bug Firefox/Safari)
+        function switchTab(tabId, element) {
+            playMusic();
 
             const tabs = document.querySelectorAll('.tab-content');
             tabs.forEach(tab => tab.classList.remove('active'));
@@ -396,10 +521,12 @@
             menuItems.forEach(item => item.classList.remove('active'));
 
             document.getElementById(tabId).classList.add('active');
-            event.currentTarget.classList.add('active');
+            if(element) {
+                element.classList.add('active');
+            }
         }
 
-        // 2. Countdown Kunci: 6 Agustus 2026
+        // 3. Logika Countdown
         const birthdayDate = new Date("August 6, 2026 00:00:00").getTime();
 
         const timerInterval = setInterval(function() {
@@ -409,7 +536,8 @@
             if (distance < 0) {
                 clearInterval(timerInterval);
                 document.querySelector(".timer-container").innerHTML = 
-                    "<h2 style='color:var(--gold); font-family:\"Playfair Display\"; width:100%; text-align:center; padding:15px;'>🎉 HAPPY BIRTHDAY CINTAKU! 🎉</h2>";
+                    "<h2 style='color:var(--gold); font-family:\"Playfair Display\"; width:100%; text-align:center; padding:10px;'>🎉 HAPPY BIRTHDAY CINTAKU! 🎉</h2>";
+                triggerConfetti();
             } else {
                 const d = Math.floor(distance / (1000 * 60 * 60 * 24));
                 const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -423,9 +551,10 @@
             }
         }, 1000);
 
-        // 3. Efek Buka Surat
+        // 4. Buka & Tutup Surat + Efek Confetti Emas
         function openLetter() {
-            playMusic(); // Pemicu musik alternatif
+            playMusic();
+            triggerConfetti();
             const letter = document.getElementById('letter');
             const envelope = document.getElementById('envelope');
             
@@ -437,19 +566,80 @@
             }, 300);
         }
 
-        // 4. Klik Layar Keluar Sparkles Emas
+        function closeLetter() {
+            const letter = document.getElementById('letter');
+            const envelope = document.getElementById('envelope');
+            
+            letter.style.display = "none";
+            envelope.style.display = "inline-block";
+            setTimeout(() => {
+                envelope.style.transform = "none";
+                envelope.style.opacity = "1";
+            }, 50);
+        }
+
+        // 5. Efek Sparkles Saat Layar Diklik
         document.body.addEventListener('click', function(e) {
             if(e.target.tagName === 'BUTTON' || e.target.closest('.nav-menu')) return;
             
             const sparkle = document.createElement('div');
             sparkle.classList.add('click-sparkle');
-            sparkle.innerHTML = ['✨','🖤','🌟','👑'][Math.floor(Math.random() * 4)];
+            sparkle.innerHTML = ['✨','🖤','🌟','👑','💖'][Math.floor(Math.random() * 5)];
             sparkle.style.left = e.clientX + 'px';
             sparkle.style.top = e.clientY + 'px';
             
             document.body.appendChild(sparkle);
             setTimeout(() => { sparkle.remove(); }, 800);
         });
+
+        // 6. Efek Canvas Confetti/Kembang Api Emas Lightweight
+        const canvas = document.getElementById("confettiCanvas");
+        const ctx = canvas.getContext("2d");
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        function triggerConfetti() {
+            for (let i = 0; i < 50; i++) {
+                particles.push({
+                    x: window.innerWidth / 2,
+                    y: window.innerHeight / 2,
+                    vx: (Math.random() - 0.5) * 12,
+                    vy: (Math.random() - 0.5) * 12 - 3,
+                    size: Math.random() * 6 + 2,
+                    color: ['#d4af37', '#fdf0a6', '#ffffff', '#aa7c11'][Math.floor(Math.random() * 4)],
+                    alpha: 1,
+                    decay: Math.random() * 0.02 + 0.01
+                });
+            }
+        }
+
+        function renderConfetti() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach((p, index) => {
+                p.x += p.vx;
+                p.y += p.vy;
+                p.vy += 0.15; // Gravitasi
+                p.alpha -= p.decay;
+
+                ctx.globalAlpha = Math.max(0, p.alpha);
+                ctx.fillStyle = p.color;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fill();
+
+                if (p.alpha <= 0) {
+                    particles.splice(index, 1);
+                }
+            });
+            requestAnimationFrame(renderConfetti);
+        }
+        renderConfetti();
     </script>
 </body>
 </html>
